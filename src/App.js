@@ -1,8 +1,8 @@
 // import logo from "./logo.svg";
-import banner from "./banner.png";
-import card1 from "./img/get-started.jpg";
-import card2 from "./img/connect.jpg";
-import card3 from "./img/share.jpg";
+import banner from "./banner.png"; // Photo by Martin Garrido: https://unsplash.com/photos/cVUPic1cbd4
+import card1 from "./img/get-started.jpg"; // Photo by Kelly Sikkema: https://unsplash.com/photos/DUiRgwrHKXI
+import card2 from "./img/connect.jpg"; // Photo by Volodymr Hryshchenko: https://unsplash.com/photos/V5vqWC9gyEU
+import card3 from "./img/share.jpg"; // Photo by Brett Jordan.:https://unsplash.com/photos/Obyan1bxya8
 import "./App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
@@ -30,9 +30,7 @@ function App() {
 
       {/* ///////////////// HEADER SECTION ///////////////// */}
       <header>
-        {/* BANNER
-          Original photo by Martin Garrido: https://unsplash.com/photos/cVUPic1cbd4
-        */}
+        {/* BANNER */}
         <div class="container-fluid">
         <div className="overhead-header">
         <p class="fs-1 fw-bold text-danger">LAN</p>
