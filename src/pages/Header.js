@@ -10,13 +10,13 @@ function Header() {
       {/* ///////////////// HEADER SECTION ///////////////// */}
       <header>
         {/* BANNER */}
-        <div class="container-fluid">
+        <div className="container-fluid">
         <div className="overhead-header">
-        <p class="fs-1 fw-bold text-danger">LAN</p>
+        <p className="fs-1 fw-bold text-danger">LAN</p>
         <h5>Loop Agile Now</h5>
         The new innovative social media website for industries. 
           </div>
-          <img src={banner} class="img-fluid" alt="banner" />
+          <img src={banner} className="img-fluid" alt="banner" />
           
         </div>
       </header>

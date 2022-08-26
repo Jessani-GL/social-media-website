@@ -1,72 +1,30 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { useState } from 'react';
 
 import useForm from "../components/useForm";
 import validate from "../components/SigninValidation";
-import { useLocation, useNavigate } from "react-router-dom";
-import {addUsers} from '../data/repository'
+import { useNavigate } from "react-router-dom";
+import { addUsers } from "../data/repository";
 
 function Signup(props) {
   const navigate = useNavigate();
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const myprofile = useLocation();
-  // const [email,  setEmail] =  useState('');
-  // const [password, setPassword] = useState('');
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     login,
     validate
   );
 
-   function login() {
-
-    
-
-    //  I NEED TO CONVERT FIRST NAME AND LAST NAME INTO LOWERCASE THEN REPLACE FIRST LETTER WITH CAPS
+  function login() {
+    //  Note to self: I NEED TO CONVERT FIRST NAME AND LAST NAME INTO LOWERCASE THEN REPLACE FIRST LETTER WITH CAPS
     addUsers(values.firstName, values.lastName, values.email, values.password);
     console.log("No errors, submit callback called!");
     console.log("Go to next page with a sign in success notification");
 
+    // Globally saving the user email (unique)
     props.loginUser(values.email);
-    // alert('success')
-    // const users = JSON.parse(localStorage.getItem("users") || "[]");
-    // const user = {
-    //   email: values.email,
-    //   password: values.password,
-    // };
 
-    // users.push(user);
-    // localStorage.setItem("users", JSON.stringify(users));
-    // console.log(localStorage.getItem("users"));
-   
-    // event.preventDefault();
-    navigate('/myprofile');
-
-
-    // if (myprofile.state?.from) {
-    //         navigate(myprofile.state.from);
-    //       }
-    //       console.log('hell o')
-
-
-    //     return;
-//    function success() {
-//     if (myprofile.state?.from) {
-//       navigate(myprofile.state.from);
-//     }
-//     console.log('hell o')
-//    }
-//     return (
-//       // success()
-//       <div className="main-box-large">
-// <p>AJEBFKESJFBKSJEFBNJKHSEBFk</p>
-// console.log('hell o')
-//       </div>
-      
-//     );
+    navigate("/myprofile");
   }
 
   return (
@@ -80,8 +38,7 @@ function Signup(props) {
             {/* FORM */}
 
             <div className="container-sm fs-6">
-
-            <div className="form-floating mb-4 " style={{ color: "#000" }}>
+              <div className="form-floating mb-4 " style={{ color: "#000" }}>
                 <input
                   type="text"
                   name="firstName"
@@ -100,7 +57,7 @@ function Signup(props) {
                 )}
               </div>
 
-            <div className="form-floating mb-4 " style={{ color: "#000" }}>
+              <div className="form-floating mb-4 " style={{ color: "#000" }}>
                 <input
                   type="text"
                   name="lastName"
@@ -138,7 +95,7 @@ function Signup(props) {
                 )}
               </div>
 
-              <div class="form-floating mb-4" style={{ color: "#000" }}>
+              <div className="form-floating mb-4" style={{ color: "#000" }}>
                 <input
                   type="password"
                   name="password"

@@ -1,6 +1,9 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
+import {
+  getUserProperties,
+} from "../data/repository";
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
@@ -194,16 +197,16 @@ function Forum2() {
 
   function addComment(comment) {
   
-        <div class="comment">
-            <div class="top-comment">
-                <p class="user">
+        <div className="comment">
+            <div className="top-comment">
+                <p className="user">
                     ${comment.author}
                 </p>
-                <p class="comment-ts">
+                <p className="comment-ts">
                     ${new Date(comment.date).toLocaleString()}
                 </p>
             </div>
-            <div class="comment-content">
+            <div className="comment-content">
                 ${comment.content}
             </div>
         </div>
@@ -269,7 +272,8 @@ function Forum2() {
 }
 
 // ADD LOCAL STORAGE TO THIS. STORE INTO ARRAY OBJECT STUFF 
-function Forum() {
+function Forum(props) {
+  const userDetails = getUserProperties(props.username);
   const [post, setPost] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -290,7 +294,7 @@ function Forum() {
     }
 
     // Create post.
-    setPosts([ ...posts, { username: 'name', text: postTrimmed }]);
+    setPosts([ ...posts, { username: `${userDetails.fName} ${userDetails.lName}`, text: postTrimmed }]);
 
     // Reset post content.
     setPost("");

@@ -10,18 +10,18 @@ function Content() {
     <div className="App">
 
       {/* ///////////////// MAIN SECTION 1 ///////////////// */}
-      <div class="main-box space-between">
+      <div className="main-box space-between">
         {/* CONTAINER */}
         <div className="container-xl fs-5 ">
-          <div class="row">
+          <div className="row">
             {" "}
             {/* ROW */}
-            <div class="col">{/* START OF COL */}
-              <div class="card" style={{ color: "#000" }} id='moveup'>
+            <div className="col">{/* START OF COL */}
+              <div className="card" style={{ color: "#000" }} id='moveup'>
                 <img src={card1} class="card-img-top" alt="banner" />
 
-                <div class="card-body">
-                  <h2 class="card-title">Get Started &#9745;</h2>
+                <div className="card-body">
+                  <h2 className="card-title">Get Started &#9745;</h2>
                   Sign up and create your account today to start
                   communicating with work and education with LAN!
                   
@@ -30,24 +30,24 @@ function Content() {
 
             </div> {/* END OF COL */}
 
-            <div class="col"> {/* START OF COL */}
-              <div class="card" style={{ color: "#000" }} id='moveup'>
-                <img src={card2} class="card-img-top" alt="banner" />
+            <div className="col"> {/* START OF COL */}
+              <div className="card" style={{ color: "#000" }} id='moveup'>
+                <img src={card2} className="card-img-top" alt="banner" />
 
-                <div class="card-body">
-                  <h2 class="card-title">Connect with friends</h2>
+                <div className="card-body">
+                  <h2 className="card-title">Connect with friends</h2>
                   Connect with friends and colleagues! Customise and follow
                   people that you choose.
                 </div>
               </div>
             </div> {/* END OF COL */}
 
-            <div class="col">{/* START OF COL */}
-            <div class="card" style={{ color: "#000" }} id='moveup'>
-                <img src={card3} class="card-img-top" alt="banner" />
+            <div className="col">{/* START OF COL */}
+            <div className="card" style={{ color: "#000" }} id='moveup'>
+                <img src={card3} className="card-img-top" alt="banner" />
 
-                <div class="card-body">
-                  <h2 class="card-title">Share and Post!</h2>
+                <div className="card-body">
+                  <h2 className="card-title">Share and Post!</h2>
                   Post and share messages and more with your friends!
                   Be part of a enganging community.
                 </div>
@@ -63,33 +63,33 @@ function Content() {
       </div>
 
       {/* ///////////////// MAIN SECTION 2 ///////////////// */}
-      <div class="main-box">
-        <div class="container-xl fs-5 ">
-          <p class="fs-2 fw-bold">COMMUNICATE WITH YOUR COLLEAGUES AND FRIENDS</p>
-          <div class="row">
+      <div className="main-box">
+        <div className="container-xl fs-5 ">
+          <p className="fs-2 fw-bold">COMMUNICATE WITH YOUR COLLEAGUES AND FRIENDS</p>
+          <div className="row">
             {/* row */}
-            <div class="col">
+            <div className="col">
               {/* FORM */}
               <form>
                 <group>
                   <label>Email address</label>
                   <input
                     type="email"
-                    class="form-control"
+                    className="form-control"
                     placeholder="email@email.com"
                   ></input>
-                  <text class="text-muted">We will not share your email</text>
+                  <text className="text-muted">We will not share your email</text>
                 </group>
               </form>
             </div>{" "}
             {/*end of col */}
-            <div class="col">
+            <div className="col">
               <form>
                 <group>
                   <label>Password</label>
                   <input
                     type="password"
-                    class="form-control"
+                    className="form-control"
                     placeholder="password123"
                   ></input>
                 </group>
@@ -102,12 +102,12 @@ function Content() {
             Login
           </button>
           {/* CONTAINER */}
-          <div class="container">
+          <div className="container">
             <p>hello this is a container</p>
           </div>
           {/* CARD */}
-          <div class="card" style={{ color: "#000" }}>
-            <div class="card-body">This is some text within a card body.</div>
+          <div className="card" style={{ color: "#000" }}>
+            <div className="card-body">This is some text within a card body.</div>
           </div>
         </div>{" "}
         {/* end of CONTAINER */}

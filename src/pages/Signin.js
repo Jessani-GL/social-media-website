@@ -35,6 +35,7 @@ function Signin(props) {
     printValues();
     
     
+    
     const isVerified = verifyUser(emailField, passwordField)
 
     if (isVerified === true) {
@@ -58,7 +59,7 @@ function Signin(props) {
             {/* FORM */}
 
             <div className="container-sm fs-6">
-              <div class="form-floating mb-4 " style={{ color: "#000" }}>
+              <div className="form-floating mb-4 " style={{ color: "#000" }}>
                 <input
                   type="email"
                   value={emailField}
