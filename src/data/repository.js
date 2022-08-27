@@ -124,7 +124,6 @@ function verifyUser(username, password) {
   const users = getUsers();
   
   for (const loggedUser of users) {
-    console.log(`compared email: ${loggedUser.email} and ${username}`)
     
     if (username === loggedUser.email && password === loggedUser.password ) {
       setUser(username);

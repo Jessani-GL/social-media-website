@@ -37,6 +37,7 @@ function Signin(props) {
     
     const isVerified = verifyUser(emailField, passwordField)
     console.log(`The key: ${props.username} The value: ${emailField}`);
+    console.log(typeof(emailField));
     if (isVerified === true) {
       props.loginUser(emailField);
       navigate('/myprofile');
