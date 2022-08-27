@@ -35,27 +35,24 @@ function addUsers(
 }
 
 // original
-// function getUserProperties(email) {
-//   let userData = {};
+function getUserProperties(email) {
+  let userData = {};
 
-//   const data = getUsers();
+  const data = getUsers();
 
-  
-
-//   for (const user of data) {
-//     if (user.email === email) {
-//       userData = {
-//         fName: user.fName,
-//         lName: user.lName,
-//         email: user.email,
-//         password: user.password,
-//         joinedDate: user.joinedDate,
-//       };
-//     }
-//   }
-//   return userData;
-//   // return data
-// }
+  for (const user of data) {
+    if (user.email === email) {
+      userData = {
+        fName: user.fName,
+        lName: user.lName,
+        email: user.email,
+        password: user.password,
+        joinedDate: data.joinedDate,
+      };
+    }
+  }
+  return userData;
+}
 
 // function getUserProperties(email) {
 //   let userData = {};
@@ -80,26 +77,26 @@ function addUsers(
 //   // return data
 // }
 
-function getUserProperties(email) {
-  let userData = {};
+// function getUserProperties(email) {
+//   let userData = {};
 
-  const data = getUsers();
+//   const data = getUsers();
 
 
-  for (const user of Object.entries(data)) {
-    if (user.email === email) {
-      userData = {
-        fName: user.fName,
-        lName: user.lName,
-        email: user.email,
-        password: user.password,
-        joinedDate: user.joinedDate,
-      };
-    }
-  }
-  return userData;
-  // return data
-}
+//   for (const user of Object.entries(data)) {
+//     if (user.email === email) {
+//       userData = {
+//         fName: user.fName,
+//         lName: user.lName,
+//         email: user.email,
+//         password: user.password,
+//         joinedDate: user.joinedDate,
+//       };
+//     }
+//   }
+//   return userData;
+//   // return data
+// }
 
 
 // do i need this since i already parsed it when i first initalised users...
@@ -117,7 +114,6 @@ function getUsers() {
   // } catch (error) {
   //   return {}
   // }
-
   
 }
 
@@ -125,14 +121,13 @@ function getUsers() {
 function verifyUser(username, password) {
   const users = getUsers();
   
-
   for (const loggedUser of users) {
-    console.log(`compared email: ${loggedUser.email}`)
+    // console.log(`compared email: ${loggedUser.email}`)
     if (username === loggedUser.email && password === loggedUser.password ) {
       setUser(username);
       return true;
     } else {
-      setUser(null);
+      // setUser(null);
       return false;
     }
   }
@@ -259,28 +254,28 @@ function removeUser() {
 //       const replacedPassword = newPassword !== null ? newPassword : user.password;
 // }
 
-function changeUserDetails(newEmail, newFName, newLastName, newPassword) {
-  const users = getUsers();
+// function changeUserDetails(newEmail, newFName, newLastName, newPassword) {
+//   const users = getUsers();
 
-  const user = users.find(user => user.email === newEmail) 
+//   const user = users.find(user => user.email === newEmail) 
 
-  if (!user) {
-    ;
-    users.push({fName: newFName, lName: newLastName, email: newEmail, password: newPassword })
-  } else {
-    if (newFName) user.fName = newFName;
-    if (newLastName) user.lName = newLastName;
-    if (newEmail) user.email = newEmail;
-    if (newPassword) user.password = newPassword;
-  }
+//   if (!user) {
+//     ;
+//     users.push({fName: newFName, lName: newLastName, email: newEmail, password: newPassword })
+//   } else {
+//     if (newFName) user.fName = newFName;
+//     if (newLastName) user.lName = newLastName;
+//     if (newEmail) user.email = newEmail;
+//     if (newPassword) user.password = newPassword;
+//   }
 
-  removeUser();
-    setUser(newEmail)
-  localStorage.setItem('users', JSON.stringify(users))
+//   removeUser();
+//     setUser(newEmail)
+//   localStorage.setItem('users', JSON.stringify(users))
 
   
-  return users;
-}
+//   return users;
+// }
 
 function addPost(caption, image, date) {
   // if user did not add a image, set image to default (how to do that here?)
@@ -303,7 +298,7 @@ export {
   verifyUser,
   getUser,
   removeUser,
-  changeUserDetails,
+  // changeUserDetails,
   // acquireNewUserInfo,
   // setChangedUserDetails,
 };

@@ -1,7 +1,7 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { getUserProperties, changeUserDetails } from "../data/repository";
+import { getUserProperties } from "../data/repository";
 import Popup from "../components/Popup";
 import validate from "../components/changeUserDetailsValidation";
 import useForm from "../components/useForm";
@@ -27,14 +27,14 @@ function MyProfile(props) {
     console.log(`changed name: ${values.lName}`);
     console.log(`changed name: ${values.password}`);
 
-    const newUserInfo = changeUserDetails(
-      values.firstName,
-      values.lastName,
-      values.email,
-      values.password
-    );
+    // const newUserInfo = changeUserDetails(
+    //   values.firstName,
+    //   values.lastName,
+    //   values.email,
+    //   values.password
+    // );
 
-    console.log(newUserInfo);
+    // console.log(newUserInfo);
     // let newuserDetails = getUserProperties(props.username);
     // console.log(newuserDetails);
   }
@@ -59,7 +59,7 @@ function MyProfile(props) {
             Delete
           </button>
           <p>
-            {userDetails.firstName} {userDetails.lastName}
+            {userDetails.fName} {userDetails.lName}
           </p>
           <p className="text-secondary">{userDetails.email}</p>
 
