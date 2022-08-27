@@ -112,12 +112,12 @@ header {
 
 .forum-card {
   max-width: 120vh;
-  min-width: 100vh;
+  min-width: 111vh;
   min-height: 100vh;
   padding-top: 5rem;
   padding-bottom: 10rem;
-  padding-left: 15rem;
-  padding-right: 15rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
   text-align: left;
   color: white;
   background-color: #282c34;
@@ -175,14 +175,6 @@ header {
   }
 }
 
-/* FORUM CSS */
-
-.comments {
-  margin: 40px 0;
-}
-.comment {
-  margin: 10px 0;
-}
 
 /* PROFILE CSS */
 
@@ -232,3 +224,21 @@ header {
 }
 
 button:focus {outline:0;}
+
+
+/* FORUM CSS */
+
+.comments {
+  margin: 40px 0;
+}
+.comment {
+  margin: 10px 0;
+}
+
+.post-border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.738);
+  border-radius: 1rem;
+  
+}

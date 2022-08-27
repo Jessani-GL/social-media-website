@@ -1,9 +1,7 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import {
-  getUserProperties,
-} from "../data/repository";
+import { getUserProperties } from "../data/repository";
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
@@ -171,12 +169,11 @@ function Forum1() {
 }
 
 function Forum2() {
-
   // var id = window.location.search.slice(1);
   // var thread = threads.find(t => t.id == id);
 
   function addComment(comment) {
-      var commentHtml = `
+    var commentHtml = `
           <div class="comment">
               <div class="top-comment">
                   <p class="user">
@@ -190,31 +187,21 @@ function Forum2() {
                   ${comment.content}
               </div>
           </div>
-      `
-      comments.insertAdjacentHTML('beforeend', commentHtml);
+      `;
+    comments.insertAdjacentHTML("beforeend", commentHtml);
   }
 
-
   function addComment(comment) {
-  
-        <div className="comment">
-            <div className="top-comment">
-                <p className="user">
-                    ${comment.author}
-                </p>
-                <p className="comment-ts">
-                    ${new Date(comment.date).toLocaleString()}
-                </p>
-            </div>
-            <div className="comment-content">
-                ${comment.content}
-            </div>
-        </div>
-  
-}
+    <div className="comment">
+      <div className="top-comment">
+        <p className="user">${comment.author}</p>
+        <p className="comment-ts">${new Date(comment.date).toLocaleString()}</p>
+      </div>
+      <div className="comment-content">${comment.content}</div>
+    </div>;
+  }
 
-  let comments = document.querySelector('.comments');
-
+  let comments = document.querySelector(".comments");
 
   // for (let comment of comments) {
   //     addComment(comment);
@@ -235,21 +222,18 @@ function Forum2() {
   // })
 
   function handleClick() {
-    var txt = document.querySelector('textarea');
+    var txt = document.querySelector("textarea");
     var comment = {
-        content: txt.value,
-        date: Date.now(),
-        author: 'Aaron'
-    }
+      content: txt.value,
+      date: Date.now(),
+      author: "Aaron",
+    };
     addComment(comment);
-    txt.value = '';
+    txt.value = "";
 
     const newComment = this.addComment();
-    return (
-      <div>{newComment}</div>
-    )
+    return <div>{newComment}</div>;
   }
-
 
   return (
     <div className="App">
@@ -258,11 +242,9 @@ function Forum2() {
         <div className="forum-card">
           <h1>Forum</h1>
 
-          <textarea className='caption-area'></textarea>
-        <button onClick={handleClick}>add comment</button>
-        <div class="comments">
-        </div>
-         
+          <textarea className="caption-area"></textarea>
+          <button onClick={handleClick}>add comment</button>
+          <div class="comments"></div>
         </div>
       </div>{" "}
       {/* end of main-box custom-card */}
@@ -271,80 +253,147 @@ function Forum2() {
   );
 }
 
-// ADD LOCAL STORAGE TO THIS. STORE INTO ARRAY OBJECT STUFF 
+// ADD LOCAL STORAGE TO THIS. STORE INTO ARRAY OBJECT STUFF
 function Forum(props) {
   const userDetails = getUserProperties(props.username);
   const [post, setPost] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [posts, setPosts] = useState([]);
 
+  const [characterCount,  setCharacterCount] = useState(0);
+
   const handleInputChange = (event) => {
     setPost(event.target.value);
-  }
+    setCharacterCount(event.target.value.length);
+  };
+
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     // Trim the post text.
     const postTrimmed = post.trim();
 
-    if(postTrimmed === "") {
+    
+
+    if (postTrimmed === "") {
       setErrorMessage("A post cannot be empty.");
+      
       return;
+    } else if (characterCount > 250) {
+      console.log(characterCount)
+      setErrorMessage("Must not exceed 250 characters");
+      return;
+    } else {
+      setCharacterCount(0)
     }
 
     // Create post.
-    setPosts([ ...posts, { username: `${userDetails.fName} ${userDetails.lName}`, text: postTrimmed }]);
+    setPosts([
+      ...posts,
+      {
+        username: `${userDetails.fName} ${userDetails.lName}`,
+        text: postTrimmed,
+      },
+    ]);
 
     // Reset post content.
     setPost("");
     setErrorMessage("");
+  };
+
+
+
+  const hiddenFBtn = document.getElementById('fileChooser');
+  const fileBtn = document.getElementById('fileBtn');
+  
+  function clickFileChoose() {
+ // Opens file chooser
+ fileBtn.addEventListener('click', function() {
+  hiddenFBtn.click();
+})
+
+hiddenFBtn.addEventListener('change', function(){
+  if (hiddenFBtn.value) {
+    const pathway = hiddenFBtn.value
+    console.log(pathway)
+    // customTxt.innerHTML = fileBtn.value;
+  } 
+  // else{
+  
+  // }
+})
   }
 
+
+
+
   return (
-    <div className='dark-bg'>
-      <div className='forum-card'>
-
-      <h1>Forum</h1>
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          
-          <div className="form-group">
-            <textarea name="post" id="post" className="form-control" rows="3" 
-              placeholder='Start a post' value={post} onChange={handleInputChange} />
-          </div>
-          {errorMessage !== null &&
+    <div className="dark-bg">
+      <div className="forum-card">
+        <h1 className="text-danger">Forum</h1>
+        <form onSubmit={handleSubmit}>
+          <fieldset>
             <div className="form-group">
-              <span className="text-danger">{errorMessage}</span>
+              <textarea
+                name="post"
+                id="post"
+                className="form-control"
+                rows="3"
+                placeholder="Share your thoughts..."
+                value={post}
+                onChange={handleInputChange}
+             > </textarea>
             </div>
-          }
-          <div className="form-group">
-            <input type="button" className="btn btn-danger mr-5" value="Cancel"
-              onClick={() => { setPost(""); setErrorMessage(null); }} />
-            <input type="submit" className="btn btn-primary" value="Post" />
-          </div>
-        </fieldset>
-      </form>
+                {errorMessage !== null && (
+                  <div className="form-group">
+                    <span className="text-danger">{errorMessage}</span>
+                  </div>
+                )}
+            <div className="form-group">
+            <p class='text-white-50'>Word count: {characterCount}</p>
+              <input
+                type="button"
+                className="btn btn-danger mr-5"
+                value="Cancel"
+                onClick={() => {
+                  setPost("");
+                  setErrorMessage(null);
+                }}
+              />
+              
+              <input type='file' id='fileChooser' hidden='hidden'></input>
+              <button type="button" className="btn btn-primary" value="Image" id='fileBtn' onClick={clickFileChoose}>Image</button>
+              <input type="submit" className="btn btn-primary" value="Post" />
+            </div>
+          </fieldset>
+        </form>
 
-      <hr />
-      <legend>Posts</legend>
-      <div>
-      {
-        posts.length === 0 ?
-          <span className="text-muted">No posts have been submitted.</span>
-          :
-          posts.map((x) =>
-            <div className="border my-3 p-3" style={{ whiteSpace: "pre-wrap" }}>
-              <h3 className="text-primary">{x.username}</h3>
-              {x.text}
-            </div>
-          )
-      }
-      </div>
-      
-      </div> {/* end of forum card */}
-    </div> 
-  )
-  {/* end of forum bg */};
+        <hr />
+        <legend className="text-danger">Posts</legend>
+        <div>
+          {posts.length === 0 ? (
+            <span className="text-muted">No posts have been submitted.</span>
+          ) : (
+            posts.map((x) => (
+              <div
+                className="post-border my-3 p-3"
+                style={{ whiteSpace: "pre-wrap" }}
+              >
+                <h3 className="text-primary fs-4">{x.username}</h3>
+                {x.text}
+              </div>
+            ))
+          )}
+        </div>
+      </div>{" "}
+      {/* end of forum card */}
+    </div>
+  );
+  {
+    /* end of forum bg */
+  }
 }
 export default Forum;
