@@ -1,5 +1,5 @@
 # social-media-website
-This is a social media website project using React.js, Javascript, , Bootstrap, HTML and CSS.
+This is a social media website project using React.js, Javascript, Bootstrap, HTML and CSS.
 
 # Downlaod Node
 command to install: npm install
