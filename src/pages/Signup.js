@@ -16,14 +16,16 @@ function Signup(props) {
   );
 
   function login() {
+    const today = Date.now();
+    const dateCreated  = new Intl.DateTimeFormat('en-US', {timeZone: "Australia/Sydney"}, {year: 'numeric', day: '2-digit', month: '2-digit'}).format(today);
+    
     //  Note to self: I NEED TO CONVERT FIRST NAME AND LAST NAME INTO LOWERCASE THEN REPLACE FIRST LETTER WITH CAPS
-    addUsers(values.firstName, values.lastName, values.email, values.password);
-    console.log("No errors, submit callback called!");
-    console.log("Go to next page with a sign in success notification");
+    addUsers(values.firstName, values.lastName, values.email, values.password, dateCreated);
 
     // Globally saving the user email (unique)
     props.loginUser(values.email);
 
+    // Note to self: INCLUDE VISUAL CUE TO SHOW USER IS LOGGED IN or INCLUDE A WELCOME USER MESSAGE
     navigate("/myprofile");
   }
 

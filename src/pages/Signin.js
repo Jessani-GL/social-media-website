@@ -35,16 +35,18 @@ function Signin(props) {
     printValues();
     
     
-    
     const isVerified = verifyUser(emailField, passwordField)
-
+    console.log(`The key: ${props.username} The value: ${emailField}`);
     if (isVerified === true) {
       props.loginUser(emailField);
       navigate('/myprofile');
       console.log('login using fields');
+      
       return;
     } else{
       return console.log('wrong input');
+      navigate('/myprofile');
+      
     }
   }
 
@@ -59,7 +61,7 @@ function Signin(props) {
             {/* FORM */}
 
             <div className="container-sm fs-6">
-              <div className="form-floating mb-4 " style={{ color: "#000" }}>
+              <div class="form-floating mb-4 " style={{ color: "#000" }}>
                 <input
                   type="email"
                   value={emailField}

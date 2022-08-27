@@ -302,7 +302,7 @@ function Forum(props) {
   }
 
   return (
-    <div className='forum-bg'>
+    <div className='dark-bg'>
       <div className='forum-card'>
 
       <h1>Forum</h1>
