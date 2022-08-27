@@ -39,6 +39,7 @@ function getUserProperties(email) {
   let userData = {};
 
   const data = getUsers();
+  
 
   for (const user of data) {
     if (user.email === email) {
@@ -47,10 +48,11 @@ function getUserProperties(email) {
         lName: user.lName,
         email: user.email,
         password: user.password,
-        joinedDate: data.joinedDate,
+        joinedDate: user.joinedDate,
       };
     }
   }
+  
   return userData;
 }
 
@@ -122,14 +124,13 @@ function verifyUser(username, password) {
   const users = getUsers();
   
   for (const loggedUser of users) {
-    // console.log(`compared email: ${loggedUser.email}`)
+    console.log(`compared email: ${loggedUser.email} and ${username}`)
+    
     if (username === loggedUser.email && password === loggedUser.password ) {
       setUser(username);
       return true;
-    } else {
-      // setUser(null);
-      return false;
-    }
+    } 
+    return false;
   }
 }
 
@@ -144,6 +145,12 @@ function getUser() {
 function removeUser() {
   localStorage.removeItem("users");
 }
+
+// function removeSpecificUser(email) {
+//   const users = getUsers();
+//   const user = users.filter(user => user.email === email) 
+//   localStorage.removeItem(user);
+// }
 
 // ======================  CHANGING USER INFORMATION ======================
 // function changeUserDetails(email, newFName, newLName, newEmail, newPassword) {
@@ -254,28 +261,28 @@ function removeUser() {
 //       const replacedPassword = newPassword !== null ? newPassword : user.password;
 // }
 
-// function changeUserDetails(newEmail, newFName, newLastName, newPassword) {
-//   const users = getUsers();
+function changeUserDetails(newEmail, newFName, newLastName, newPassword) {
+  const users = getUsers();
 
-//   const user = users.find(user => user.email === newEmail) 
+  const user = users.find(user => user.email === newEmail) 
 
-//   if (!user) {
-//     ;
-//     users.push({fName: newFName, lName: newLastName, email: newEmail, password: newPassword })
-//   } else {
-//     if (newFName) user.fName = newFName;
-//     if (newLastName) user.lName = newLastName;
-//     if (newEmail) user.email = newEmail;
-//     if (newPassword) user.password = newPassword;
-//   }
+  if (!user) {
+    ;
+    users.push({fName: newFName, lName: newLastName, email: newEmail, password: newPassword })
+  } else {
+    if (newFName) user.fName = newFName;
+    if (newLastName) user.lName = newLastName;
+    if (newEmail) user.email = newEmail;
+    if (newPassword) user.password = newPassword;
+  }
 
-//   removeUser();
-//     setUser(newEmail)
-//   localStorage.setItem('users', JSON.stringify(users))
+  removeUser();
+    setUser(newEmail)
+  localStorage.setItem('users', JSON.stringify(users))
 
   
-//   return users;
-// }
+  return users;
+}
 
 function addPost(caption, image, date) {
   // if user did not add a image, set image to default (how to do that here?)
@@ -298,6 +305,7 @@ export {
   verifyUser,
   getUser,
   removeUser,
+  // removeSpecificUser,
   // changeUserDetails,
   // acquireNewUserInfo,
   // setChangedUserDetails,

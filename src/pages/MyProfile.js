@@ -1,17 +1,19 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { getUserProperties } from "../data/repository";
+import { getUserProperties, removeUser, removeSpecificUser} from "../data/repository";
 import Popup from "../components/Popup";
 import validate from "../components/changeUserDetailsValidation";
 import useForm from "../components/useForm";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function MyProfile(props) {
+  const navigate = useNavigate();
   // use useEffect for this userDetails to reload the component with the new information
   // Or or And I could make a method for and have 'onChange'
   const userDetails = getUserProperties(props.username);
-
+  console.log(`USERNAME: ${props.username}`)
   const [editPopup, setEditPopup] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
 
@@ -19,6 +21,14 @@ function MyProfile(props) {
     changeUserInfo,
     validate
   );
+
+  // Deletes users account
+  function handleDeleteUser() {
+    navigate("/");
+    removeUser();
+    props.logoutUser();
+    
+  }
 
   function changeUserInfo() {
     console.log("change user click");
@@ -178,7 +188,7 @@ function MyProfile(props) {
           <hr />
           <h5>Confirm to delete your account.</h5>
 
-          <button type="button" class="btn btn-danger btn-right">
+          <button type="button" class="btn btn-danger btn-right" onClick={() => {setDeletePopup(false); handleDeleteUser()}}>
             Delete
           </button>
         </Popup>
