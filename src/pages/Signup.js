@@ -7,9 +7,13 @@ import validate from "../components/SigninValidation";
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../data/repository";
 
+import Popup from "../components/Popup";
+import { useState } from "react";
+
 function Signup(props) {
   const navigate = useNavigate();
-  
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const { values, errors, handleChange, handleSubmit } = useForm(
     login,
@@ -18,15 +22,28 @@ function Signup(props) {
 
   function login() {
     const today = Date.now();
-    const dateCreated  = new Intl.DateTimeFormat('en-US', {timeZone: "Australia/Sydney"}, {year: 'numeric', day: '2-digit', month: '2-digit'}).format(today);
-    
+    const dateCreated = new Intl.DateTimeFormat(
+      "en-US",
+      { timeZone: "Australia/Sydney" },
+      { year: "numeric", day: "2-digit", month: "2-digit" }
+    ).format(today);
+
     //  Note to self: I NEED TO CONVERT FIRST NAME AND LAST NAME INTO LOWERCASE THEN REPLACE FIRST LETTER WITH CAPS
-    addUsers(values.firstName, values.lastName, values.email, values.password, dateCreated);
+    addUsers(
+      values.firstName,
+      values.lastName,
+      values.email,
+      values.password,
+      dateCreated
+    );
 
     // Globally saving the user email (unique)
     props.loginUser(values.email);
 
     // Note to self: INCLUDE VISUAL CUE TO SHOW USER IS LOGGED IN or INCLUDE A WELCOME USER MESSAGE
+  }
+
+  function continuetoProfile() {
     navigate("/myprofile");
   }
 
@@ -120,14 +137,31 @@ function Signup(props) {
             <button
               type="button"
               className="btn btn-light mb-4"
-              onClick={handleSubmit}
+              onClick={() => {
+                setLoggedIn(true);
+                handleSubmit();
+              }}
               noValidate
             >
               Submit
             </button>
-
-            <text className="text-muted fs-6">Already have a account? </text>
           </div>{" "}
+          <Popup trigger={isLoggedIn} setTrigger={setLoggedIn}>
+            <h1 className="text-success">You have successfully loggedin</h1>
+            <hr />
+            <h5>To continue, click 'continue'.</h5>
+
+            <button
+              type="button"
+              class="btn btn-light btn-right"
+              onClick={() => {
+                setLoggedIn(false);
+                continuetoProfile();
+              }}
+            >
+              Continue
+            </button>
+          </Popup>
         </div>
 
         {/* end of CONTAINER */}

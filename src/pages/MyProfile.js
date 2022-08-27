@@ -9,6 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function MyProfile(props) {
+
+
+  
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const showPopup = () => setLoggedIn(true)
+  
+
+  
+
   const navigate = useNavigate();
   // use useEffect for this userDetails to reload the component with the new information
   // Or or And I could make a method for and have 'onChange'
@@ -54,6 +63,7 @@ function MyProfile(props) {
       <div className="main-box-large-dark">
         <div className="profile-card">
           <h1 className="text-danger">Profile</h1>
+          
           <button
             type="button"
             className="btn btn-dark"
@@ -77,6 +87,9 @@ function MyProfile(props) {
           {/* /////////// POP UP FOR EDIT PROFILE  /////////// */}
           <p>Joined date: {userDetails.joinedDate}</p>
         </div>
+
+      
+
         <Popup trigger={editPopup} setTrigger={setEditPopup}>
           <h1 className="text-danger">Edit Profile</h1>
           <hr />
