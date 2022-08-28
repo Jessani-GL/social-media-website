@@ -3,9 +3,10 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { verifyUser } from "../data/repository";
+import { getUser, verifyUser, getUserProperties, addUsers } from "../data/repository";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
+
 
 function Signin(props) {
   // const [fields, setFields] = useState({email:'', password:''})
@@ -24,25 +25,27 @@ function Signin(props) {
   //   setFields(values);
   // }
 
-  const printValues = e => {
-    
-    console.log(emailField, passwordField);
-  };
+
 
   function handleLogin () {
-    console.log('fields')
-    // console.log(emailField, passwordField);
-    printValues();
-    
     
     const isVerified = verifyUser(emailField, passwordField)
-    console.log(`The key: ${props.username} The value: ${emailField}`);
-    console.log(typeof(emailField));
+    
     if (isVerified === true) {
-      props.loginUser(emailField);
+      const input =  JSON.stringify(emailField)
+      props.loginUser(input);
+
+      const previousData = getUserProperties(input);
+
+       addUsers(
+        previousData.fName,
+        previousData.lName,
+        previousData.email,
+        previousData.password,
+        previousData.joinedDate
+    );
       navigate('/myprofile');
-      console.log('login using fields');
-      
+   
       return;
     } else{
       return console.log('wrong input');

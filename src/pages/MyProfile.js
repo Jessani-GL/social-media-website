@@ -1,7 +1,7 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { getUserProperties, removeUser, removeSpecificUser} from "../data/repository";
+import { getUserProperties, removeUser, removeSpecificUser, changeUserDetails, getUsers} from "../data/repository";
 import Popup from "../components/Popup";
 import validate from "../components/changeUserDetailsValidation";
 import useForm from "../components/useForm";
@@ -11,18 +11,21 @@ import { useState } from "react";
 function MyProfile(props) {
 
 
-  
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const showPopup = () => setLoggedIn(true)
-  
 
   
-
   const navigate = useNavigate();
   // use useEffect for this userDetails to reload the component with the new information
   // Or or And I could make a method for and have 'onChange'
-  const userDetails = getUserProperties(props.username);
-  console.log(`USERNAME: ${props.username}`)
+  const userJoinedDate = getUserProperties(props.username, getUsers());
+  let [userDetails, setUserDetais] = useState(getUserProperties(props.username, getUsers()));
+  
+  
+  const [userInfo, setUserInfo] = useState({fName: userDetails.fName, lName:  userDetails.lName,  email: userDetails.email});
+  
+  // console.log(userInfo);
+
+  // console.log(`USERNAME: ${props.username}`)
   const [editPopup, setEditPopup] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
 
@@ -42,22 +45,26 @@ function MyProfile(props) {
   function changeUserInfo() {
     console.log("change user click");
     console.log(`changed name: ${values.fName}`);
-    console.log(`changed name: ${values.email}`);
-    console.log(`changed name: ${values.lName}`);
-    console.log(`changed name: ${values.password}`);
+    console.log(`changed email: ${values.email}`);
+    console.log(`changed lastname: ${values.lName}`);
+    console.log(`changed password: ${values.password}`);
 
-    // const newUserInfo = changeUserDetails(
-    //   values.firstName,
-    //   values.lastName,
-    //   values.email,
-    //   values.password
-    // );
+    
+    const newUserDetails = changeUserDetails(
+      values.firstName,
+      values.lastName,
+      values.email,
+      values.password
+    );
 
-    // console.log(newUserInfo);
-    // let newuserDetails = getUserProperties(props.username);
-    // console.log(newuserDetails);
+    // const newUsername = newUserDetails.email;
+    // props.username={newUsername}
+
+    setUserDetais(newUserDetails);
+    setUserInfo({...userInfo, fName: values.firstName, lName: values.lastName, email: values.email})
+ 
   }
-
+  
   return (
     <div className="App">
       <div className="main-box-large-dark">
@@ -73,19 +80,19 @@ function MyProfile(props) {
           </button>
           <button
             type="button"
-            className="btn btn-dark"
+            className="btn btn-dark button-pos"
             onClick={() => setDeletePopup(true)}
           >
             Delete
           </button>
           <p>
-            {userDetails.fName} {userDetails.lName}
+            {userInfo.fName} {userInfo.lName}
           </p>
-          <p className="text-secondary">{userDetails.email}</p>
+          <p className="text-secondary">{userInfo.email}</p>
 
           <hr />
           {/* /////////// POP UP FOR EDIT PROFILE  /////////// */}
-          <p>Joined date: {userDetails.joinedDate}</p>
+          <p>Joined date: {userJoinedDate.joinedDate}</p>
         </div>
 
       
@@ -102,11 +109,12 @@ function MyProfile(props) {
                 class="form-control"
                 placeholder="First name"
                 aria-label="First name"
-                // required
+                required
                 className={`form-control ${
                   errors.firstName && "validationCustom03"
                 }`}
                 id="floatingPassword"
+                // onChange={e => setUserInfo({...userInfo, fName: e.target.value})}
                 onChange={handleChange}
                 value={values.firstName}
               ></input>
@@ -120,11 +128,13 @@ function MyProfile(props) {
                 name="lastName"
                 class="form-control"
                 placeholder="Last name"
+                required
                 aria-label="Last name"
                 className={`form-control ${
                   errors.lastName && "validationCustom03"
                 }`}
                 id="floatingPassword"
+                // onChange={(e) => (setUserInfo({...userInfo, lName: e.target.value}))}
                 onChange={handleChange}
                 value={values.lastName}
               ></input>
@@ -142,12 +152,13 @@ function MyProfile(props) {
                 name="email"
                 class="form-control"
                 placeholder="Email"
-                // required
+                required
                 aria-label="Email"
                 className={`form-control ${
                   errors.email && "validationCustom03"
                 }`}
                 id="floatingPassword"
+                // onChange={e => setUserInfo({...userInfo, email: e.target.value})}
                 onChange={handleChange}
                 value={values.email}
               ></input>
@@ -155,35 +166,7 @@ function MyProfile(props) {
             </div>
           </div>
 
-          <h5>Change Password</h5>
-          <div class="row">
-            <div class="col mb-4">
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                placeholder="Password"
-                aria-label="Password"
-                className={`form-control ${
-                  errors.password && "validationCustom03"
-                }`}
-                id="floatingPassword"
-                onChange={handleChange}
-                value={values.password}
-              ></input>
-              {errors.password && (
-                <p className="text-danger">{errors.password}</p>
-              )}
-            </div>
-            <div class="col mb-4">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Re-enter password"
-                aria-label="Re-enter passowrd"
-              ></input>
-            </div>
-          </div>
+         
           {/* {errors.all && <p className="text-danger">{errors.all}</p>} */}
           <button
             type="button"

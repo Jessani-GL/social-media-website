@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
-import { getUser, removeUser } from "./data/repository";
+import { getUser, removeUser, getUsers} from "./data/repository";
 // pages
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
@@ -16,10 +16,15 @@ import Home from "./pages/Home.js";
 function App() {
   const [username, setUsername] = useState(getUser());
 
+
   const loginUser = (username) => {
     setUsername(username);
+
   };
 
+
+
+    
   const logoutUser = () => {
     setUsername(null);
   };

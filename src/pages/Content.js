@@ -62,56 +62,6 @@ function Content() {
         {/* CONTAINER */}
       </div>
 
-      {/* ///////////////// MAIN SECTION 2 ///////////////// */}
-      <div className="main-box">
-        <div className="container-xl fs-5 ">
-          <p className="fs-2 fw-bold">COMMUNICATE WITH YOUR COLLEAGUES AND FRIENDS</p>
-          <div className="row">
-            {/* row */}
-            <div className="col">
-              {/* FORM */}
-              <form>
-                <group>
-                  <label>Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="email@email.com"
-                  ></input>
-                  <text className="text-muted">We will not share your email</text>
-                </group>
-              </form>
-            </div>{" "}
-            {/*end of col */}
-            <div className="col">
-              <form>
-                <group>
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="password123"
-                  ></input>
-                </group>
-              </form>
-            </div>
-            {/*end of col */}
-          </div>{" "}
-          {/*end of row */}
-          <button type="button" class="btn btn-secondary">
-            Login
-          </button>
-          {/* CONTAINER */}
-          <div className="container">
-            <p>hello this is a container</p>
-          </div>
-          {/* CARD */}
-          <div className="card" style={{ color: "#000" }}>
-            <div className="card-body">This is some text within a card body.</div>
-          </div>
-        </div>{" "}
-        {/* end of CONTAINER */}
-      </div>{" "}
       {/* end of MAIN */}
 
       {/* ///////////////// MAIN SECTION 3 (get rid of later potentially) ///////////////// */}

@@ -1,7 +1,7 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { getUserProperties } from "../data/repository";
+import { getUserProperties, getUsers, addPost } from "../data/repository";
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
@@ -237,7 +237,6 @@ function Forum2() {
 
   return (
     <div className="App">
-      {/* auth.token ? <Outlet/> :  <Navigate to="/" replace state={{from: myprofile}}/> */}
       <div className="forum-bg">
         <div className="forum-card">
           <h1>Forum</h1>
@@ -255,39 +254,36 @@ function Forum2() {
 
 // ADD LOCAL STORAGE TO THIS. STORE INTO ARRAY OBJECT STUFF
 function Forum(props) {
-  const userDetails = getUserProperties(props.username);
+  const userDetails = getUserProperties(props.username, getUsers());
   const [post, setPost] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [posts, setPosts] = useState([]);
 
-  const [characterCount,  setCharacterCount] = useState(0);
+  const [characterCount, setCharacterCount] = useState(0);
 
   const handleInputChange = (event) => {
     setPost(event.target.value);
     setCharacterCount(event.target.value.length);
   };
 
-
-  
+  const postTrimmed = post.trim();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    // Trim the post text.
-    const postTrimmed = post.trim();
 
+    // Trim the post text.
     
 
     if (postTrimmed === "") {
       setErrorMessage("A post cannot be empty.");
-      
+
       return;
     } else if (characterCount > 250) {
-      console.log(characterCount)
+      console.log(characterCount);
       setErrorMessage("Must not exceed 250 characters");
       return;
     } else {
-      setCharacterCount(0)
+      setCharacterCount(0);
     }
 
     // Create post.
@@ -304,31 +300,30 @@ function Forum(props) {
     setErrorMessage("");
   };
 
+  const hiddenFBtn = document.getElementById("fileChooser");
+  const fileBtn = document.getElementById("fileBtn");
 
-
-  const hiddenFBtn = document.getElementById('fileChooser');
-  const fileBtn = document.getElementById('fileBtn');
-  
   function clickFileChoose() {
- // Opens file chooser
- fileBtn.addEventListener('click', function() {
-  hiddenFBtn.click();
-})
+    // Opens file chooser
+    fileBtn.addEventListener("click", function () {
+      hiddenFBtn.click();
+    });
 
-hiddenFBtn.addEventListener('change', function(){
-  if (hiddenFBtn.value) {
-    const pathway = hiddenFBtn.value
-    console.log(pathway)
-    // customTxt.innerHTML = fileBtn.value;
-  } 
-  // else{
-  
-  // }
-})
+    hiddenFBtn.addEventListener("change", function () {
+      if (hiddenFBtn.value) {
+        const pathway = hiddenFBtn.value;
+        console.log(pathway);
+        // customTxt.innerHTML = fileBtn.value;
+      }
+      // else{
+
+      // }
+    });
   }
 
-
-
+  function savePosts() {
+    addPost(postTrimmed)
+  }
 
   return (
     <div className="dark-bg">
@@ -345,15 +340,17 @@ hiddenFBtn.addEventListener('change', function(){
                 placeholder="Share your thoughts..."
                 value={post}
                 onChange={handleInputChange}
-             > </textarea>
+              >
+                {" "}
+              </textarea>
             </div>
-                {errorMessage !== null && (
-                  <div className="form-group">
-                    <span className="text-danger">{errorMessage}</span>
-                  </div>
-                )}
+            {errorMessage !== null && (
+              <div className="form-group">
+                <span className="text-danger">{errorMessage}</span>
+              </div>
+            )}
             <div className="form-group">
-            <p class='text-white-50'>Word count: {characterCount}</p>
+              <p class="text-white-50">Word count: {characterCount}</p>
               <input
                 type="button"
                 className="btn btn-danger mr-5"
@@ -363,10 +360,23 @@ hiddenFBtn.addEventListener('change', function(){
                   setErrorMessage(null);
                 }}
               />
-              
-              <input type='file' id='fileChooser' hidden='hidden'></input>
-              <button type="button" className="btn btn-primary" value="Image" id='fileBtn' onClick={clickFileChoose}>Image</button>
-              <input type="submit" className="btn btn-primary" value="Post" />
+
+              <input type="file" id="fileChooser" hidden="hidden"></input>
+              <button
+                type="button"
+                className="btn btn-primary button-pos"
+                value="Image"
+                id="fileBtn"
+                onClick={clickFileChoose}
+              >
+                Image
+              </button>
+              <input
+                type="submit"
+                className="btn btn-primary button-pos"
+                value="Post"
+                onClick={savePosts}
+              />
             </div>
           </fieldset>
         </form>

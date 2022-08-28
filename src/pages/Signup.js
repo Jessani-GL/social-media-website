@@ -40,6 +40,8 @@ function Signup(props) {
     // Globally saving the user email (unique)
     props.loginUser(values.email);
 
+    setLoggedIn(true);
+
     // Note to self: INCLUDE VISUAL CUE TO SHOW USER IS LOGGED IN or INCLUDE A WELCOME USER MESSAGE
   }
 
@@ -138,7 +140,7 @@ function Signup(props) {
               type="button"
               className="btn btn-light mb-4"
               onClick={() => {
-                setLoggedIn(true);
+                
                 handleSubmit();
               }}
               noValidate

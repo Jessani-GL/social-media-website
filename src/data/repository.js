@@ -16,7 +16,7 @@ function addUsers(
   inputPassword,
   joinedDate
 ) {
-  console.log(inputEmail, inputPassword);
+  
   // Stops if data is already registered / in the data.
   // if (localStorage.getItem("users") !== null) return;
 
@@ -35,12 +35,11 @@ function addUsers(
 }
 
 // original
-function getUserProperties(email) {
+// returns an object
+function getUserProperties(email, data) {
   let userData = {};
 
-  const data = getUsers();
   
-
   for (const user of data) {
     if (user.email === email) {
       userData = {
@@ -260,36 +259,42 @@ function removeUser() {
 //       const replacedPassword = newPassword !== null ? newPassword : user.password;
 // }
 
-function changeUserDetails(newEmail, newFName, newLastName, newPassword) {
-  const users = getUsers();
+function changeUserDetails(prevuousUser, newEmail, newFName, newLastName) {
+  let appenedUsers = []
 
+  const users = getUsers();
+ 
   const user = users.find(user => user.email === newEmail) 
 
+  const saved = users;
+  // removeUser()
+  // const previousUser = localStorage.getItem("users");
+  // users.shift();
+  // users.slice(3)
+
+  
   if (!user) {
     ;
-    users.push({fName: newFName, lName: newLastName, email: newEmail, password: newPassword })
+    users.push([{fName: newFName, lName: newLastName, email: newEmail}])
   } else {
     if (newFName) user.fName = newFName;
     if (newLastName) user.lName = newLastName;
     if (newEmail) user.email = newEmail;
-    if (newPassword) user.password = newPassword;
+    
   }
 
-  removeUser();
-    setUser(newEmail)
+  setUser(newEmail)
+
   localStorage.setItem('users', JSON.stringify(users))
 
-  
   return users;
 }
 
-function addPost(caption, image, date) {
+function addPost(caption) {
   // if user did not add a image, set image to default (how to do that here?)
   const posts = JSON.parse(localStorage.getItem("userPosts") || "[]");
   const post = {
-    fName: image,
-    image: image,
-    date: date,
+    caption: caption
   };
 
   posts.push(post);
@@ -305,7 +310,8 @@ export {
   getUser,
   removeUser,
   // removeSpecificUser,
-  // changeUserDetails,
+  changeUserDetails,
+  addPost,
   // acquireNewUserInfo,
   // setChangedUserDetails,
 };
