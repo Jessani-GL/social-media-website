@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+// Custom hook to handle validation for multiple forms on the website.
+// This was used to simplify the code instead of having multiple methods to validate various forms.
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});

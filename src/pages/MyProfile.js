@@ -10,31 +10,28 @@ import { useState } from "react";
 
 function MyProfile(props) {
 
-
-  const [isLoggedIn, setLoggedIn] = useState(false);
-
-  
   const navigate = useNavigate();
-  // use useEffect for this userDetails to reload the component with the new information
-  // Or or And I could make a method for and have 'onChange'
-  const userJoinedDate = getUserProperties(props.username, getUsers());
-  let [userDetails, setUserDetais] = useState(getUserProperties(props.username, getUsers()));
-  
-  
-  const [userInfo, setUserInfo] = useState({fName: userDetails.fName, lName:  userDetails.lName,  email: userDetails.email});
-  
-  // console.log(userInfo);
 
-  // console.log(`USERNAME: ${props.username}`)
+  // Retrieves date of when the user created their account in order to print onto the profile page. 
+  const userJoinedDate = getUserProperties(props.username, getUsers());
+  // This useState was created so that the system can update the user details when the user changes their details when editing a profile.
+  let [userDetails, setUserDetais] = useState(getUserProperties(props.username, getUsers()));
+  // This useState is used to create active changes on the website when user changes their profile information.
+  const [userInfo, setUserInfo] = useState({fName: userDetails.fName, lName:  userDetails.lName,  email: userDetails.email});
+  // A boolean useState to determine whether or not the popup for profile edit is shown based the user clicking on the corresponding button
   const [editPopup, setEditPopup] = useState(false);
+  // A boolean useState to determine whether or not the popup for delete profile is shown based the user clicking on the corresponding button
+  // A popup for delete account is made for confirmation if the user wants to delete their profile or not. 
+  // Because it would be inconvenient if the user accidentally deletes their account if there was no confirmation. 
   const [deletePopup, setDeletePopup] = useState(false);
 
+  // Custom hook to validate the form. 
   const { values, errors, handleChange, handleSubmit } = useForm(
     changeUserInfo,
     validate
   );
 
-  // Deletes users account
+  // Deletes users account and navigates them back to the home page.
   function handleDeleteUser() {
     navigate("/");
     removeUser();
@@ -42,14 +39,9 @@ function MyProfile(props) {
     
   }
 
+  // This changes the user information when user has inputed their changed values.
   function changeUserInfo() {
-    console.log("change user click");
-    console.log(`changed name: ${values.fName}`);
-    console.log(`changed email: ${values.email}`);
-    console.log(`changed lastname: ${values.lName}`);
-    console.log(`changed password: ${values.password}`);
 
-    
     const newUserDetails = changeUserDetails(
       values.firstName,
       values.lastName,
@@ -57,9 +49,7 @@ function MyProfile(props) {
       values.password
     );
 
-    // const newUsername = newUserDetails.email;
-    // props.username={newUsername}
-
+    // Confirms changes
     setUserDetais(newUserDetails);
     setUserInfo({...userInfo, fName: values.firstName, lName: values.lastName, email: values.email})
  
@@ -101,12 +91,12 @@ function MyProfile(props) {
           <h1 className="text-danger">Edit Profile</h1>
           <hr />
           <h5>Change Name</h5>
-          <div class="row">
-            <div class="col mb-4">
+          <div className="row">
+            <div className="col mb-4">
               <input
                 type="text"
                 name="firstName"
-                class="form-control"
+                
                 placeholder="First name"
                 aria-label="First name"
                 required
@@ -122,11 +112,11 @@ function MyProfile(props) {
                 <p className="text-danger">{errors.firstName}</p>
               )}
             </div>
-            <div class="col">
+            <div className="col">
               <input
                 type="text"
                 name="lastName"
-                class="form-control"
+                
                 placeholder="Last name"
                 required
                 aria-label="Last name"
@@ -145,12 +135,12 @@ function MyProfile(props) {
           </div>
 
           <h5>Change Email</h5>
-          <div class="row">
-            <div class="col mb-4">
+          <div className="row">
+            <div className="col mb-4">
               <input
                 type="text"
                 name="email"
-                class="form-control"
+                
                 placeholder="Email"
                 required
                 aria-label="Email"
@@ -170,7 +160,7 @@ function MyProfile(props) {
           {/* {errors.all && <p className="text-danger">{errors.all}</p>} */}
           <button
             type="button"
-            class="btn btn-dark btn-right"
+            className="btn btn-dark btn-right"
             onClick={handleSubmit}
             noValidate
           >
@@ -184,7 +174,7 @@ function MyProfile(props) {
           <hr />
           <h5>Confirm to delete your account.</h5>
 
-          <button type="button" class="btn btn-danger btn-right" onClick={() => {setDeletePopup(false); handleDeleteUser()}}>
+          <button type="button" className="btn btn-danger btn-right" onClick={() => {setDeletePopup(false); handleDeleteUser()}}>
             Delete
           </button>
         </Popup>

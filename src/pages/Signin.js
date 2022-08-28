@@ -3,32 +3,20 @@
 import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
-import { getUser, verifyUser, getUserProperties, addUsers } from "../data/repository";
+import { verifyUser, getUserProperties, addUsers } from "../data/repository";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
-
 function Signin(props) {
-  // const [fields, setFields] = useState({email:'', password:''})
+  
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
   const navigate = useNavigate();
-  
-  // const handleFieldsChange = (event) => {
-  //   event.persist();
-  //   const emailInput = event.target.name;
-  //   const passwordInput = event.target.name;
-    
-  //   const values = {username: fields.email,  password: fields.password};
 
-  //   values[emailInput] = passwordInput;
-  //   setFields(values);
-  // }
-
-
-
+  // Executes when user logs in. 
   function handleLogin () {
     
+    // Checks if user data and input is the same.
     const isVerified = verifyUser(emailField, passwordField)
     
     if (isVerified === true) {
@@ -47,10 +35,10 @@ function Signin(props) {
       navigate('/myprofile');
    
       return;
-    } else{
+    } 
+    else{
       return console.log('wrong input');
-      // navigate('/myprofile');
-      
+
     }
   }
 
@@ -65,7 +53,7 @@ function Signin(props) {
             {/* FORM */}
 
             <div className="container-sm fs-6">
-              <div class="form-floating mb-4 " style={{ color: "#000" }}>
+              <div className="form-floating mb-4 " style={{ color: "#000" }}>
                 <input
                   type="email"
                   value={emailField}

@@ -12,6 +12,7 @@ function Header() {
         {/* BANNER */}
         <div className="container-fluid">
         <div className="overhead-header">
+          {/* Logo */}
         <p className="fs-1 fw-bold text-danger">LAN</p>
         <h5>Loop Agile Now</h5>
         The new innovative social media website for industries. 

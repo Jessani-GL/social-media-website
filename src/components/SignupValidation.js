@@ -1,6 +1,5 @@
-  
 export default function validate(values) {
-  // SIMILAR TO ERRORS. , ADD ONE FOR CORRECT
+  // Signup validation
 
   let errors = {};
   if (!values.email) {
@@ -9,12 +8,21 @@ export default function validate(values) {
     errors.email = "Email address is invalid";
   }
 
+  if (!values.password) {
+    errors.password = "Password is required";
+  } else if (values.password.length < 8) {
+    errors.password =
+      "Password must be 8 or more characters, contains a number and special character";
+  } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(values.password)) {
+    errors.password = "Password must contain a number and special character";
+  }
+
   if (!values.firstName) {
     errors.firstName = "First name is required";
   } else if (!/^[a-zA-Z ]+$/.test(values.firstName)) {
     errors.firstName = "Name invalid, please use letters only";
   }
-  
+  ///^[a-z\u00C0-\u02AB'´`]+\.?\s([a-z\u00C0-\u02AB'´`]+\.?\s?)+$/
   if (!values.lastName) {
     errors.lastName = "Last name is required";
   } else if (!/^[a-zA-Z ]+$/.test(values.lastName)) {

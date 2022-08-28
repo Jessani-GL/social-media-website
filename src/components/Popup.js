@@ -1,5 +1,6 @@
 import React from 'react';
-
+// This is for the visual popup for profile edit, delete account and visual cue for registration. 
+// This code enables user to close the popup.
 function Popup(props)  {
     return (props.trigger) ? (
         <div className='popup'>

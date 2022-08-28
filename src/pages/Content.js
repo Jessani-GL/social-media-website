@@ -5,10 +5,10 @@ import "../App.css";
 // Boostrap styling
 import "bootstrap/dist/css/bootstrap.css";
 
+// Main home page  content
 function Content() {
   return (
     <div className="App">
-
       {/* ///////////////// MAIN SECTION 1 ///////////////// */}
       <div className="main-box space-between">
         {/* CONTAINER */}
@@ -16,22 +16,23 @@ function Content() {
           <div className="row">
             {" "}
             {/* ROW */}
-            <div className="col">{/* START OF COL */}
-              <div className="card" style={{ color: "#000" }} id='moveup'>
-                <img src={card1} class="card-img-top" alt="banner" />
+            <div className="col">
+              {/* START OF COL */}
+              <div className="card" style={{ color: "#000" }} id="moveup">
+                <img src={card1} className="card-img-top" alt="banner" />
 
                 <div className="card-body">
                   <h2 className="card-title">Get Started &#9745;</h2>
-                  Sign up and create your account today to start
-                  communicating with work and education with LAN!
-                  
+                  Sign up and create your account today to start communicating
+                  with work and education with LAN!
                 </div>
               </div>
-
-            </div> {/* END OF COL */}
-
-            <div className="col"> {/* START OF COL */}
-              <div className="card" style={{ color: "#000" }} id='moveup'>
+            </div>{" "}
+            {/* END OF COL */}
+            <div className="col">
+              {" "}
+              {/* START OF COL */}
+              <div className="card" style={{ color: "#000" }} id="moveup">
                 <img src={card2} className="card-img-top" alt="banner" />
 
                 <div className="card-body">
@@ -40,16 +41,17 @@ function Content() {
                   people that you choose.
                 </div>
               </div>
-            </div> {/* END OF COL */}
-
-            <div className="col">{/* START OF COL */}
-            <div className="card" style={{ color: "#000" }} id='moveup'>
+            </div>{" "}
+            {/* END OF COL */}
+            <div className="col">
+              {/* START OF COL */}
+              <div className="card" style={{ color: "#000" }} id="moveup">
                 <img src={card3} className="card-img-top" alt="banner" />
 
                 <div className="card-body">
                   <h2 className="card-title">Share and Post!</h2>
-                  Post and share messages and more with your friends!
-                  Be part of a enganging community.
+                  Post and share messages and more with your friends! Be part of
+                  a enganging community.
                 </div>
               </div>
             </div>{" "}
@@ -64,9 +66,7 @@ function Content() {
 
       {/* end of MAIN */}
 
-      {/* ///////////////// MAIN SECTION 3 (get rid of later potentially) ///////////////// */}
-
-{/* Nothing here yet */}
+      {/* Nothing here yet */}
     </div>
   );
 }

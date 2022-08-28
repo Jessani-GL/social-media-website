@@ -3,24 +3,27 @@ import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 import useForm from "../components/useForm";
-import validate from "../components/SigninValidation";
+import validate from "../components/SignupValidation";
+import Popup from "../components/Popup";
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../data/repository";
-
-import Popup from "../components/Popup";
 import { useState } from "react";
 
+// Signup page
 function Signup(props) {
   const navigate = useNavigate();
-
+  // This used state is used for the sucessful popup cue. If 'true' the pop up will show.
   const [isLoggedIn, setLoggedIn] = useState(false);
 
+  // Custom hook to validate the signup form.
   const { values, errors, handleChange, handleSubmit } = useForm(
     login,
     validate
   );
 
+  // The 'login' function executes if the user sucessfully logs in without errors.
   function login() {
+    // Creates the date of when the user created their acccount.
     const today = Date.now();
     const dateCreated = new Intl.DateTimeFormat(
       "en-US",
@@ -28,7 +31,7 @@ function Signup(props) {
       { year: "numeric", day: "2-digit", month: "2-digit" }
     ).format(today);
 
-    //  Note to self: I NEED TO CONVERT FIRST NAME AND LAST NAME INTO LOWERCASE THEN REPLACE FIRST LETTER WITH CAPS
+    // Save their details into localStorage.
     addUsers(
       values.firstName,
       values.lastName,
@@ -40,11 +43,12 @@ function Signup(props) {
     // Globally saving the user email (unique)
     props.loginUser(values.email);
 
+    // Popup message for visual cue for successful login
     setLoggedIn(true);
-
-    // Note to self: INCLUDE VISUAL CUE TO SHOW USER IS LOGGED IN or INCLUDE A WELCOME USER MESSAGE
   }
 
+  // Navigates to profile page. This function is seperate because the user is supposed to continue to the profile page after seeing the successful visual cue.
+  // When the user clicks 'Continue', after acknowledging that they successfully made an account, they will go to the profile page then.
   function continuetoProfile() {
     navigate("/myprofile");
   }
@@ -140,7 +144,6 @@ function Signup(props) {
               type="button"
               className="btn btn-light mb-4"
               onClick={() => {
-                
                 handleSubmit();
               }}
               noValidate
@@ -148,6 +151,7 @@ function Signup(props) {
               Submit
             </button>
           </div>{" "}
+          {/* Pop up */}
           <Popup trigger={isLoggedIn} setTrigger={setLoggedIn}>
             <h1 className="text-success">You have successfully loggedin</h1>
             <hr />
@@ -155,7 +159,7 @@ function Signup(props) {
 
             <button
               type="button"
-              class="btn btn-light btn-right"
+              className="btn btn-light btn-right"
               onClick={() => {
                 setLoggedIn(false);
                 continuetoProfile();

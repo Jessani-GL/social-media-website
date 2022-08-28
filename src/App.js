@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
-import { getUser, removeUser, getUsers} from "./data/repository";
+import { getUser} from "./data/repository";
 // pages
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
@@ -14,22 +14,19 @@ import Forum from "./pages/Forum.js";
 import Home from "./pages/Home.js";
 
 function App() {
+  // Sets username which is globally used in other files. 
   const [username, setUsername] = useState(getUser());
 
-
+  // Confirms if the user is logged in.
   const loginUser = (username) => {
     setUsername(username);
 
   };
-
-
-
-    
+  
+  // Method to log out the user
   const logoutUser = () => {
     setUsername(null);
   };
-
-  console.log(`username:  ${username}`);
 
   return (
     <div className="">
