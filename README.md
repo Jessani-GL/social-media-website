@@ -1,5 +1,4 @@
-Student number: s3844703
-Student name: Jessani Linsangan
+
 
 # How to run the code
 Type in the two commands below in the terminal:
